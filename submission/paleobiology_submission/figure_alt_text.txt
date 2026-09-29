@@ -1,0 +1,42 @@
+Figure accessibility descriptions (alt-text), one per figure.
+
+Figure 1. Flow diagram of the five-stage generative chain: a latent
+mortality schedule produces ages, then assemblage formation (attritional
+deaths versus catastrophic standing crop), the observation process q(a),
+age-estimation error, and reporting scheme determine the recorded fossil
+age evidence; dashed nodes mark processes external to the population.
+
+Figure 2. Three panels. A: likelihood surface over Weibull scale and
+shape when a juvenile-deficit truth is fitted under a wrong constant-q
+assumption. B: estimated mean age at death rising monotonically as the
+assumed standing-crop growth rate r increases, showing the estimate
+depends on r rather than the data. C: weakly curved likelihood surface
+from a single maximum-only report.
+
+Figure 3. Heatmap of mean bias in the estimated median age at death for
+the informed analyst across fossilization scenarios (rows) and sample
+sizes 5 to 100 (columns), pooled over three extant schedules; warm
+colours indicate overestimation and cool colours underestimation.
+
+Figure 4. Stacked bar chart: fraction of informed-analyst scenarios
+classified A (robust), B (conditional), C (weak), and D (not
+identifiable) for each mortality summary; mean age at death and E[M_50]
+are mostly A/B, the median and juvenile hazard mostly C/D.
+
+Figure 5. Two panels. Left: estimated median age-at-death distributions
+under four evidence models; model D (double-counted maximum) shows
+spuriously narrow precision. Right: expected observed maximum E[M_n]
+rising with sample size n, shown for the latent distribution and for an
+observed distribution with juvenile under-recovery.
+
+Figure 6. Three panels for Maiasaura. Left: histogram of LAG counts
+dominated by the zero-LAG class. Middle: fitted latent survival curves
+by model family under an attritional, complete-recovery reading. Right:
+tornado-style sensitivity of the estimated median to analysis choices,
+with marker shape denoting model family.
+
+Figure 7. Three panels for the Bayesian Maiasaura demonstration. Left:
+posterior survival bands against the empirical survival curve. Middle:
+posterior distribution for the standardized expected maximum E[M_50]
+with the observed dataset maximum marked. Right: posterior densities for
+the model shape parameters.
