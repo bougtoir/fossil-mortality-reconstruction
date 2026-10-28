@@ -11,6 +11,7 @@ Datasets (see data_inventory.csv):
 Each dataset is fit under multiple model families, assemblage mechanisms and
 q scenarios. Outputs: output/tables/phase6_*.csv, output/figures/fig_fossil_*.png
 """
+import paths  # noqa: F401 — resolves project root from script location, creates output dirs
 import numpy as np, pandas as pd, sys, json
 import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -29,7 +30,10 @@ def fit_all(studies, assemblage, r, q_family, q_kw, ages=Ages, seed=0):
     for fam in FAMS:
         m, info = fit_mle(fam, ages, studies, assemblage=assemblage, r=r,
                           q_family=q_family, q_kw=q_kw, seed=seed, n_starts=5)
-        if m is not None:
+        if m is None:
+            print(f'  WARNING: {fam} fit did not converge '
+                  f'(assemblage={assemblage}, r={r}, q={q_family})')
+        else:
             tg = mortality_targets(m, ages)
             out[fam] = dict(model=m, info=info, targets=tg)
     return out
@@ -132,13 +136,15 @@ for tax in ['Morganucodon', 'Kuehneotherium']:
             rows.append(summarize_fit(f'{tax}|{tag}', fam, fit))
 
 # ============================================================ 4. Albertosaurus grouped lx
-emp_lx = np.array([1000, 1000, 954, 954, 909, 909, 864, 864, 818, 773, 773, 727,
-                   682, 636, 545, 456, 409, 312, 273, 182, 136, 91, 91, 45, 45,
-                   45, 45, 45, 1], float)
+# Source: empirical lx (per 1000) transcribed in the Griebeler 2021 Dryad
+# README (Erickson et al. 2004/2006 data); n=22 specimens implied.
+alb = pd.read_csv('../data/processed/albertosaurus_griebeler2021_lx.csv')
+emp_lx = alb['lx_per_1000'].to_numpy(float)
 n_spec = 22
 dx = -np.diff(emp_lx)
 counts = np.round(dx / 1000 * n_spec).astype(int)
-edges_a = np.arange(0, 30, 1.0)
+edges_a = np.arange(0, len(emp_lx), 1.0)  # 28 one-year bins matching dx
+assert len(counts) == len(edges_a) - 1
 st_a = [{'type': 'grouped', 'edges': edges_a, 'counts': counts}]
 ages_a = np.linspace(1e-4, 35, 4000)
 for (asm, r_, tag) in [('attritional', 0.0, 'attritional'),

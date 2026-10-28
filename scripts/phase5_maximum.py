@@ -6,11 +6,13 @@
 (b) M_5 vs M_100 are not comparable statistics; standardized E[M_n*] proposal.
 Outputs: output/tables/phase5_*.csv, output/figures/fig_maximum.png
 """
+import paths  # noqa: F401 — resolves project root from script location, creates output dirs
 import numpy as np, pandas as pd, sys, json
 import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 sys.path.insert(0, '.')
-from mortality_models import MortalityModel, observed_density, expected_max, _cdf_from_density
+from mortality_models import (MortalityModel, observed_density, expected_max,
+                              mortality_targets, _cdf_from_density)
 from fitting import fit_mle
 from scipy.optimize import minimize
 
@@ -66,11 +68,13 @@ g_obs = observed_density(truth, ages, 'attritional', 0.0,
 for nn in [5, 40, 100]:
     print(f'observed-process E[M_{nn}] = {expected_max(g_obs, ages, nn):.1f}')
 
+true_median = mortality_targets(truth, ages)['median']
+print(f'true latent median = {true_median:.3f}')
 fig, axs = plt.subplots(1, 2, figsize=(10, 4))
 ax = axs[0]
 for lab, grp in df.groupby('model'):
     ax.hist(grp['median'], bins=20, alpha=0.5, label=lab, density=True)
-ax.axvline(8.33, color='k', ls='--', label='truth')
+ax.axvline(true_median, color='k', ls='--', label='truth')
 ax.set_xlabel('estimated median age at death (yr)'); ax.legend(fontsize=8)
 ax.set_title('Median estimate by evidence model')
 ax = axs[1]
@@ -81,7 +85,10 @@ ax.set_xlabel('sample size n'); ax.set_ylabel('E[M_n] (yr)')
 ax.set_title('The "oldest individual" is a sample-size statistic')
 ax.legend(); fig.tight_layout()
 fig.savefig('../output/figures/fig_maximum.png', dpi=160)
-json.dump({'E_M5': expected_max(g_true, ages, 5),
+json.dump({'true_median': true_median,
+           'true_family': 'weibull', 'true_lam': 10.0, 'true_k': 2.0,
+           'n_rep': REPS, 'n_individual': 40, 'n_max': 40, 'n_external_max': 30,
+           'E_M5': expected_max(g_true, ages, 5),
            'E_M40': expected_max(g_true, ages, 40),
            'E_M100': expected_max(g_true, ages, 100),
            'obs_E_M40': expected_max(g_obs, ages, 40),

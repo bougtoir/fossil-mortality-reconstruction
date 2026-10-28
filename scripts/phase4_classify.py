@@ -5,6 +5,7 @@ Classes: A robust (|bias|<=0.5yr or <=10% of Amax AND rmse_rel<=0.4, fail<=0.1)
          C weak (estimates produced but error dominating)
          D not identifiable (fail>0.5 or degenerate)
 """
+import paths  # noqa: F401 — resolves project root from script location, creates output dirs
 import pandas as pd, numpy as np, sys
 import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt

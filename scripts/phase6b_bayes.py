@@ -5,6 +5,7 @@ emcee posterior for Weibull + Siler under the primary scenario
 observed maximum (10 LAGs) compared against predicted M_49 distribution.
 Outputs: output/tables/phase6b_posterior.csv, output/figures/fig_posterior.png
 """
+import paths  # noqa: F401 — resolves project root from script location, creates output dirs
 import numpy as np, pandas as pd, sys, json
 import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt

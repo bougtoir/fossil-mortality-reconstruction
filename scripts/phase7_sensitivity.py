@@ -11,6 +11,7 @@ For each fossil dataset (Maiasaura primary; others secondary):
   - leave-one-study-out not applicable (single study) → leave-one-age-class-out
 Output: output/tables/phase7_sensitivity.csv; console summary of materiality.
 """
+import paths  # noqa: F401 — resolves project root from script location, creates output dirs
 import numpy as np, pandas as pd, sys
 sys.path.insert(0, '.')
 from mortality_models import mortality_targets

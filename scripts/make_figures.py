@@ -1,5 +1,6 @@
 """Make remaining manuscript figures: generative scheme, fossil demos,
 sensitivity tornado."""
+import paths  # noqa: F401 — resolves project root from script location, creates output dirs
 import numpy as np, pandas as pd, sys
 import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt

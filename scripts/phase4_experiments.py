@@ -6,6 +6,7 @@ under 'naive' (attritional + constant q + exact likelihood) and 'informed'
 bias, RMSE, spread (P5-P95), failure freq on latent targets.
 Output: output/tables/recoverability_map.csv (+ raw per-rep estimates).
 """
+import paths  # noqa: F401 — resolves project root from script location, creates output dirs
 import numpy as np, pandas as pd, sys, itertools, json
 from multiprocessing import Pool
 sys.path.insert(0, '.')

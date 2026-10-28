@@ -22,6 +22,21 @@ def omml_eq(runs):
             parts.append(
                 f'<m:f xmlns:m="{M}"><m:num><m:r><m:t>{r[1]}</m:t></m:r></m:num>'
                 f'<m:den><m:r><m:t>{r[2]}</m:t></m:r></m:den></m:f>')
+        elif r[0] == 'sub':
+            parts.append(
+                f'<m:sSub xmlns:m="{M}"><m:e><m:r><m:t>{r[1]}</m:t></m:r></m:e>'
+                f'<m:sub><m:r><m:t>{r[2]}</m:t></m:r></m:sub></m:sSub>')
+        elif r[0] == 'nary':
+            # ('nary', char, sub, sup, body) — e.g. Σ with limits
+            sub_xml = (f'<m:sub><m:r><m:t>{r[2]}</m:t></m:r></m:sub>'
+                       if r[2] else '<m:sub/>')
+            sup_xml = (f'<m:sup><m:r><m:t>{r[3]}</m:t></m:r></m:sup>'
+                       if r[3] else '<m:sup/>')
+            parts.append(
+                f'<m:nary xmlns:m="{M}"><m:naryPr><m:chr m:val="{r[1]}"/>'
+                f'<m:limLoc m:val="undOvr"/></m:naryPr>'
+                f'{sub_xml}{sup_xml}'
+                f'<m:e><m:r><m:t>{r[4]}</m:t></m:r></m:e></m:nary>')
         elif r[0] == 'int':
             parts.append(
                 f'<m:nary xmlns:m="{M}"><m:naryPr><m:chr m:val="∫"/>'

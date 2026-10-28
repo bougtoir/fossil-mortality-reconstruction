@@ -1,4 +1,12 @@
 {
+ "true_median": 8.330086116666667,
+ "true_family": "weibull",
+ "true_lam": 10.0,
+ "true_k": 2.0,
+ "n_rep": 60,
+ "n_individual": 40,
+ "n_max": 40,
+ "n_external_max": 30,
  "E_M5": 14.619531402438168,
  "E_M40": 20.472800328303546,
  "E_M100": 22.615051878985064,

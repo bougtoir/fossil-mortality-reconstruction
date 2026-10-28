@@ -6,6 +6,7 @@ B) Catastrophic assemblage: r confounded with mortality parameters.
 C) Maximum-only evidence: weak identification; role of n.
 Outputs: output/figures/fig_identifiability.png, output/tables/identifiability_*.csv
 """
+import paths  # noqa: F401 — resolves project root from script location, creates output dirs
 import numpy as np, sys, json
 import matplotlib
 matplotlib.use('Agg')
