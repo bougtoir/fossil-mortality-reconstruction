@@ -1,0 +1,9 @@
+numpy
+pandas
+scipy
+matplotlib
+emcee
+rdata
+python-docx
+openpyxl
+python-pptx
